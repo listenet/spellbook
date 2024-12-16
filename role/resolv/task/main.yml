@@ -1,0 +1,6 @@
+- name: Configure resolv.conf
+  lineinfile:
+    path: "{{ resolv_path }}""
+    state: present
+    regexp: '^nameserver '
+    line: "nameserver {{ domain_name_server_ip }}"
