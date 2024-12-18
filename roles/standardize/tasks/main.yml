@@ -1,0 +1,8 @@
+---
+
+- import_tasks: resolv.yml
+  when: resolv_config
+
+- import_tasks: swap.yml
+  when: swap_off
+

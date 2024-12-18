@@ -1,0 +1,8 @@
+- hosts:
+  - all
+  become_user: root
+  roles:
+  - standardize
+  vars:
+  - resolv_config: true
+  - swap_off: true

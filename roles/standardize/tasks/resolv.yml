@@ -1,0 +1,32 @@
+- name: Configure resolv.conf domain name server ip 
+  lineinfile:
+    path: "{{ resolv_path }}"
+    state: present
+    regexp: '^nameserver '
+    line: "nameserver {{ domain_name_server_ip }}"
+
+- name: Configure resolv.conf delete options 
+  lineinfile:
+    path: "{{ resolv_path }}"
+    state: absent
+    regexp: '^options'
+
+- name: Configure resolv.conf options 
+  lineinfile:
+    path: "{{ resolv_path }}"
+    state: present
+    regexp: '^options'
+    line: "options timeout:{{ domain_name_options_timeout }} attempts:{{ domain_name_options_attempts }}"
+  
+- name: Configure resolv.conf delete search 
+  lineinfile:
+    path: "{{ resolv_path }}"
+    state: absent
+    regexp: '^search'
+
+- name: Configure resolv.conf search 
+  lineinfile:
+    path: "{{ resolv_path }}"
+    state: present
+    regexp: '^search'
+    line: "search {{ domain_name_options_search }}" 
