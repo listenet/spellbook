@@ -1,4 +1,4 @@
-.cache/spellbook.tar:
+.cache/spellbook.tar: .cache
 	echo "rm old spellbook.tar"
 	rm -f .cache/spellbool.tar
 	echo "tar new spellbook.tar"
@@ -12,6 +12,9 @@ put_s3: .cache/spellbook.tar
 
 ansible_galaxy_install_demo:
 	ansible-galaxy install -r ./manifest/requirements.yml -p community --force
+
+.cache:
+	mkdir -p .cache
 	
-clean: .cache/spellbook.tar
+clean: .cache .cache/spellbook.tar
 	rm .cache/spellbook.tar
