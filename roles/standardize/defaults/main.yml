@@ -1,5 +1,5 @@
-  resolv_config: true
-  swap_off: true
+resolv_config: true
+swap_off: true
 
 resolv_path: "/etc/resolv.conf"
 
