@@ -6,3 +6,8 @@
 - import_tasks: swap.yml
   when: swap_off
 
+- import_tasks: firewalld.yml
+  when: firewalld_off
+
+- import_tasks: chronyc.yml
+  when: instant_sync_time

@@ -1,5 +1,8 @@
 resolv_config: true
 swap_off: true
+firewalld_off: true
+instant_sync_time: false
+chronyc_run_num: 3
 
 resolv_path: "/etc/resolv.conf"
 

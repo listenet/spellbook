@@ -1,0 +1,4 @@
+---
+- name: Instant sync time 
+  command: "chronyc makestep"
+  with_sequence: start=1 end={{chronyc_run_num}}
