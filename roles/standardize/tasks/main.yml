@@ -11,3 +11,6 @@
 
 - import_tasks: chronyc.yml
   when: instant_sync_time
+
+- import_tasks: nfs-client.yml
+  when: install_nfs 
