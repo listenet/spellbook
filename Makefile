@@ -9,11 +9,13 @@ put_s3: .cache/spellbook.tar
 	s3cmd put --acl-public .cache/spellbook.tar s3://infra/spellbook/spellbook.tar
 	ls .cache/spellbook.tar
 
-ansible_galaxy_install_demo:
-	ansible-galaxy install -r ./manifest/requirements.yml -p community --force
+install:
+	mkdir -p community/spellbook/ ;curl -L http://<s3_domain>/infra/spellbook/spellbook.tar | tar -C community/spellbook/ -xv;
 
 .cache:
 	mkdir -p .cache
 	
 clean: .cache/spellbook.tar
 	rm .cache/spellbook.tar
+
+.PHONY: tar put_s3 install clean 
