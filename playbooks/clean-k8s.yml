@@ -1,0 +1,21 @@
+- hosts:
+    - kubenode
+  become: yes
+  become_user: root
+  roles:
+    - clean_kubernets
+  vars:
+    - clean_kubenets_node: true
+  tags:
+    - clean_k8s
+
+- hosts:
+    - kubemaster
+  become: yes
+  become_user: root
+  roles:
+    - clean_kubernets
+  vars:
+    - clean_kubenets_master: true
+  tags:
+    - clean_k8s

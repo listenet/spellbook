@@ -1,5 +1,6 @@
 - hosts:
-  - all
+    - all
+  become: yes
   become_user: root
   roles:
-  - standardize
+    - standardize

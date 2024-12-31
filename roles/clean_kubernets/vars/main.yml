@@ -1,0 +1,2 @@
+kubeadm_bin_dir: /usr/local/bin
+iptables_bin_dir: /sbin

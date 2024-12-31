@@ -1,0 +1,43 @@
+---
+- name: Flush all iptables rules
+  command: "{{ iptables_bin_dir }}/iptables -F"
+  ignore_errors: yes
+  when: clean_kubenets_node == true or clean_kubenets_master==true
+
+- name: Delete all non-default chains in iptables
+  command: "{{ iptables_bin_dir }}/iptables -X"
+  when: clean_kubenets_node == true or clean_kubenets_master==true
+
+- name: Ensure that the kubelet、docker service is stopped
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items:
+    - kubelet
+    - docker
+  when: (clean_kubenets_master == true or clean_kubenets_node == true) and ansible_os_family == "RedHat"
+
+- name: Ensure that the master node etcd service is stopped
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items:
+    - etcd 
+  when: clean_kubenets_master == true and ansible_os_family == "RedHat"
+
+- name: reset kubelet 
+  command: "{{ kubeadm_bin_dir }}/kubeadm reset -f"
+  when: clean_kubenets_node == true or clean_kubenets_master==true
+
+- name: Remove k8s related files and subdirectories
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/kubernetes
+    - /root/.kube
+    - /var/lib/etcd
+    - /etc/cni/net.d
+  when: clean_kubenets_master == true or clean_kubenets_node == true

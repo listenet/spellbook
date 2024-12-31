@@ -1,0 +1,2 @@
+clean_kubenets_node: false
+clean_kubenets_master: false

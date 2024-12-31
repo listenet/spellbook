@@ -1,0 +1,6 @@
+---
+
+- import_tasks: clean-k8s.yml
+  when: 
+    clean_kubenets_node == true 
+    or clean_kubenets_master == true 
