@@ -1,0 +1,6 @@
+domain_name_server_ip: 192.168.1.11
+domain_name_options_timeout: "2"
+domain_name_options_attempts: "2"
+domain_name_options_search: "dns.v.com"
+instant_sync_time: true
+install_nfs: true
