@@ -9,6 +9,9 @@ put_s3: .cache/spellbook.tar
 	s3cmd put --acl-public .cache/spellbook.tar s3://infra/spellbook/spellbook.tar
 	ls .cache/spellbook.tar
 
+new_role:
+	ansible-galaxy init roles/new_empry_role
+
 install:
 	mkdir -p community/spellbook/ ;curl -L http://<s3_domain>/infra/spellbook/spellbook.tar | tar -C community/spellbook/ -xv;
 

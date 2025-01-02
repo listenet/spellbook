@@ -1,0 +1,4 @@
+- name: Reload named daemon
+  service: name=named state=reloaded
+  tags:
+    - always

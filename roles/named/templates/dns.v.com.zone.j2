@@ -1,0 +1,12 @@
+$TTL 1D
+@		IN  SOA   @    dns.v.com. (
+                    0   ; serial
+                    1H  ; refresh
+                    10M ; retry
+                    1W  ; expire
+                    6H )    ; minimum
+                IN  NS    ns1
+                IN  NS    ns2
+{% for record in dns_v_records %}
+{{ record }}
+{% endfor %}

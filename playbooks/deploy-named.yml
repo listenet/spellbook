@@ -1,0 +1,20 @@
+---
+- hosts: dnsmaster
+  gather_facts: False
+  roles:
+    - named
+  vars:
+    - dns_master: true
+    - dns_slave: false
+  tags:
+    - dns_master
+
+- hosts: dnsslave
+  gather_facts: False
+  roles:
+    - named
+  vars:
+    - dns_master: false
+    - dns_slave: true
+  tags:
+    - dns_slave

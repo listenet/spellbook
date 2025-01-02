@@ -1,15 +1,22 @@
 [route]
-v1-test-route-254
+v1-test-route-254 ansible_host=192.168.1.254
 
-[dns]
-v1-test-dns-11
+[dnsmaster]
+v1-test-dns-11 ansible_host=192.168.2.11
+
+[dnsslave]
+v1-test-dns-12 ansible_host=192.168.2.12
+
+[dns:children]
+dnsmaster
+dnsslave
 
 [kubemaster]
-v1-test-k8s-201
+v1-test-k8s-201 ansible_host=192.168.2.201
 
 [kubenode]
-v1-test-k8s-191
-v1-test-k8s-192
+v1-test-k8s-191 ansible_host=192.168.2.191
+v1-test-k8s-192 ansible_host=192.168.2.192
 
 [kube:children]
 kubemaster

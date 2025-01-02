@@ -1,0 +1,8 @@
+---
+- name: Install bind9
+  yum: 
+    name: 
+    - bind
+    - bind-libs
+    - bind-utils
+    state: present

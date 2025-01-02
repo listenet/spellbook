@@ -1,0 +1,38 @@
+---
+- name: Config named.config to bind9
+  template: 
+    src: "{{ item }}"
+    dest: "/etc/{{ item.split('.j2')[0] }}"
+    mode: 0640
+    owner: root
+    group: named
+  with_items:
+    - named.conf.j2
+  notify: 
+    - Reload named daemon
+
+- name: Config named.rfc1912.zones to bind9
+  template: 
+    src: "{{ item }}"
+    dest: "/etc/{{ item.split('.j2')[0] }}"
+    mode: 0640
+    owner: root
+    group: named
+  with_items:
+    - named.rfc1912.zones.j2
+  notify: 
+    - Reload named daemon
+  when: dns_master == true
+
+- name: Config named.rfc1912.zones_slave to bind9
+  template:
+    src: "{{ item }}"
+    dest: "/etc/{{ item.split('.j2')[0].split('_slave')[0] }}"
+    mode: 0640
+    owner: root
+    group: named
+  with_items:
+    - named.rfc1912.zones_slave.j2
+  notify: 
+    - Reload named daemon
+  when: dns_slave == true

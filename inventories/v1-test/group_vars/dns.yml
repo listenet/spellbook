@@ -1,0 +1,26 @@
+forwarder_list:
+  - 223.5.5.5
+zones_list: 
+  - dns.v.com
+
+slaves_list:
+  - 192.168.2.11
+  - 192.168.2.12
+internal_list:
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+dns_masters_list: 
+  - "192.168.2.11"
+dns_v_records:
+  - "ns1              IN  A     192.168.2.11"
+  - "ns2              IN  A     192.168.2.12"
+  - "www              IN  A     192.168.2.11"
+  - "master           IN  CNAME www"
+  - "slave            IN  A     192.168.2.12"
+  - "v1-test-dns-11   IN  A     192.168.2.11"
+  - "v1-test-dns-12   IN  A     192.168.2.12"
+  - "v1-test-k8s-201  IN  A     192.168.2.201"
+  - "v1-test-k8s-191  IN  A     192.168.2.191"
+  - "v1-test-k8s-192  IN  A     192.168.2.192"
+  - "v1-test-route-254  IN  A     192.168.2.254"
