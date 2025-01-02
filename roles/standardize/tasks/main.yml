@@ -1,4 +1,6 @@
 ---
+- name: Gather facts
+  setup:
 
 - import_tasks: resolv.yml
   when: resolv_config
@@ -14,3 +16,6 @@
 
 - import_tasks: nfs-client.yml
   when: install_nfs 
+
+- import_tasks: network.yml
+  when: ansible_default_ipv4 is defined

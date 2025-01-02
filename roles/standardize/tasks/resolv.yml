@@ -1,9 +1,16 @@
+- name: Configure resolv.conf delete domain name server ip 
+  lineinfile:
+    path: "{{ resolv_path }}"
+    state: absent
+    regexp: '^nameserver'
+
 - name: Configure resolv.conf domain name server ip 
   lineinfile:
     path: "{{ resolv_path }}"
     state: present
-    regexp: '^nameserver '
-    line: "nameserver {{ domain_name_server_ip }}"
+    insertafter: '^nameserver'
+    line: "nameserver {{ item }}"
+  with_items:  "{{ domain_name_server_ip }}"
 
 - name: Configure resolv.conf delete options 
   lineinfile:
@@ -29,4 +36,4 @@
     path: "{{ resolv_path }}"
     state: present
     regexp: '^search'
-    line: "search {{ domain_name_options_search }}" 
+    line: "search {{ domain_name_options_search | join(' ') }}" 
