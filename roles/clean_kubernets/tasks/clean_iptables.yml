@@ -1,0 +1,9 @@
+---
+- name: Flush all iptables rules
+  command: "{{ iptables_bin_dir }}/iptables -F"
+  ignore_errors: yes
+  when: clean_kubenets_node == true or clean_kubenets_master==true
+
+- name: Delete all non-default chains in iptables
+  command: "{{ iptables_bin_dir }}/iptables -X"
+  when: clean_kubenets_node == true or clean_kubenets_master==true

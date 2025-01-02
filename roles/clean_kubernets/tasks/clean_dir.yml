@@ -1,0 +1,11 @@
+---
+- name: Remove k8s related files and subdirectories
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/kubernetes
+    - /root/.kube
+    - /var/lib/etcd
+    - /etc/cni/net.d
+  when: clean_kubenets_master == true or clean_kubenets_node == true

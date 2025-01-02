@@ -1,6 +1,20 @@
 ---
+- import_tasks: clean_iptables.yml
+  when: 
+    clean_kubenets_node == true 
+    or clean_kubenets_master == true 
 
-- import_tasks: clean-k8s.yml
+- import_tasks: stop_service.yml
+  when: 
+    clean_kubenets_node == true 
+    or clean_kubenets_master == true 
+
+- import_tasks: kubelet_reset.yml
+  when: 
+    clean_kubenets_node == true 
+    or clean_kubenets_master == true 
+
+- import_tasks: clean_dir.yml
   when: 
     clean_kubenets_node == true 
     or clean_kubenets_master == true 

@@ -1,0 +1,4 @@
+---
+- name: reset kubelet 
+  command: "{{ kubeadm_bin_dir }}/kubeadm reset -f"
+  when: clean_kubenets_node == true or clean_kubenets_master==true

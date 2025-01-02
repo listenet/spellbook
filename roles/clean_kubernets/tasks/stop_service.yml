@@ -1,0 +1,19 @@
+---
+- name: Ensure that the kubelet、docker service is stopped
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items:
+    - kubelet
+    - docker
+  when: (clean_kubenets_master == true or clean_kubenets_node == true) and ansible_os_family == "RedHat"
+
+- name: Ensure that the master node etcd service is stopped
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  with_items:
+    - etcd 
+  when: clean_kubenets_master == true and ansible_os_family == "RedHat"
