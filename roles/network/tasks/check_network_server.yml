@@ -1,0 +1,19 @@
+- name: Check if NetworkManager is running
+  command: "systemctl is-active NetworkManager"
+  register: network_manager_status
+  ignore_errors: yes
+ 
+- name: Check if network is running
+  command: "systemctl is-active network"
+  register: network_status
+  ignore_errors: yes
+ 
+- name: Print result
+  debug:
+    msg: "System uses NetworkManager"
+  when: network_manager_status.rc == 0
+ 
+- name: Print result
+  debug:
+    msg: "System uses network"
+  when: network_status.rc == 0

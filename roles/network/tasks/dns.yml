@@ -1,0 +1,114 @@
+---
+- name: Gather facts
+  setup:
+
+- name: Print the default IPv4 address
+  debug:
+    msg: "Default IPv4 is {{ ansible_default_ipv4.interface }}"
+  when: ansible_default_ipv4 is defined
+
+- name: Check if NetworkManager conifg exists
+  stat:
+    path: "{{network_manager_dir}}/{{ ansible_default_ipv4.interface }}.nmconnection"
+  register: network_manager_config
+  when: ansible_default_ipv4 is defined and 
+        network_manager_status.rc == 0
+
+- name: Configure NetworkManager manager dns
+  lineinfile:
+    path: "{{network_manager_dir}}/{{ ansible_default_ipv4.interface }}.nmconnection"
+    state: present
+    regexp: '^dns='
+    line: "dns=none"
+  when: ansible_default_ipv4 is defined
+        and network_manager_dns != true
+  notify: 
+    - Reload NetworkManager
+
+- name: Configure NetworkManager delete domain name server ip 
+  lineinfile:
+    path: "{{network_manager_dir}}/{{ ansible_default_ipv4.interface }}.nmconnection"
+    state: absent
+    regexp: '^dns='
+  when: ansible_default_ipv4 is defined
+        and network_manager_status.rc == 0
+        and network_manager_config.stat.exists
+        and domain_name_server_ip | length > 0
+        and network_manager_dns == true
+
+- name: Configure NetworkManager domain name server ip 
+  lineinfile:
+    path: "{{network_manager_dir}}/{{ ansible_default_ipv4.interface }}.nmconnection"
+    state: present
+    insertafter: '^\[ipv4\]'
+    line: "dns={{ domain_name_server_ip | join(';')}}"
+  notify: 
+    - Reload NetworkManager
+  when: ansible_default_ipv4 is defined
+        and network_manager_status.rc == 0
+        and network_manager_config.stat.exists
+        and network_manager_dns == true
+
+- name: Configure NetworkManager domain name options search
+  lineinfile:
+    path: "{{network_manager_dir}}/{{ ansible_default_ipv4.interface }}.nmconnection"
+    state: present
+    regexp: '^dns-search='
+    line: "dns-search={{ domain_name_options_search | join(';') }}"
+  notify: 
+    - Reload NetworkManager
+  when: ansible_default_ipv4 is defined
+        and network_manager_status.rc == 0
+        and network_manager_config.stat.exists
+        and domain_name_options_search | length > 0
+        and network_manager_dns == true
+
+- name: Check if Network conifg exists
+  stat:
+    path: "{{network_scripts_dir}}/ifcfg-{{ ansible_default_ipv4.interface }}"
+  register: network_config
+  when: ansible_default_ipv4 is defined
+        and network_status.rc == 0
+
+- name: Configure Network delete domain name server ip 
+  lineinfile:
+    path: "{{network_scripts_dir}}/ifcfg-{{ ansible_default_ipv4.interface }}"
+    state: absent
+    regexp: '^DNS'
+  loop:  "{{ domain_name_server_ip }}"
+  loop_control:
+    extended: true
+  when: ansible_default_ipv4 is defined
+        and network_status.rc == 0
+        and network_config.stat.exists
+        and domain_name_server_ip | length > 0
+
+- name: Configure Network domain name server ip 
+  lineinfile:
+    path: "{{network_scripts_dir}}/ifcfg-{{ ansible_default_ipv4.interface }}"
+    state: present
+    regexp: '^DNS{{ ansible_loop.index }}='
+    insertafter: '^DNS{{ ansible_loop.index0 }}='
+    line: "DNS{{ ansible_loop.index	}}={{ item }}"
+  loop:  "{{ domain_name_server_ip }}"
+  loop_control:
+    extended: true
+  notify: 
+    - Reload Network
+  when: ansible_default_ipv4 is defined
+        and network_status.rc == 0
+        and network_config.stat.exists
+        and domain_name_server_ip | length > 0
+
+- name: Configure Network domain name options search
+  lineinfile:
+    path: "{{network_scripts_dir}}/ifcfg-{{ ansible_default_ipv4.interface }}"
+    state: present
+    regexp: '^DOMAIN'
+    line: "DOMAIN={{ domain_name_options_search | join(' ') }}"
+  notify: 
+    - Reload Network
+  when: ansible_default_ipv4 is defined
+        and network_status.rc == 0
+        and network_config.stat.exists
+        and domain_name_options_search | length > 0

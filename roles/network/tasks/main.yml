@@ -1,0 +1,7 @@
+---
+- import_tasks: check_network_server.yml
+  when: check_network_server == true 
+
+- import_tasks: dns.yml
+  when: network_config_dns == true 
+        and check_network_server == true 

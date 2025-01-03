@@ -1,4 +1,5 @@
 resolv_config: false 
+network_config: false 
 swap_off: true
 firewalld_off: true
 instant_sync_time: false
@@ -12,4 +13,4 @@ domain_name_server_ip:
 domain_name_options_timeout: "2"
 domain_name_options_attempts: "2"
 domain_name_options_search:
-  - ""
+  - "dns.v.com"

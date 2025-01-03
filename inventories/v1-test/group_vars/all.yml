@@ -1,6 +1,16 @@
-domain_name_server_ip: 192.168.1.11
-domain_name_options_timeout: "2"
-domain_name_options_attempts: "2"
-domain_name_options_search: "dns.v.com"
+resolv_config: true 
+network_config: true
+swap_off: true
+firewalld_off: true
 instant_sync_time: true
 install_nfs: true
+network_config_dns: true
+network_manager_dns: false
+
+domain_name_server_ip:
+  - 192.168.1.11
+  - 192.168.1.12
+domain_name_options_timeout: "2"
+domain_name_options_attempts: "2"
+domain_name_options_search:
+  - "dns.v.com"

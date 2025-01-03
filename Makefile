@@ -15,6 +15,9 @@ new_role:
 install:
 	mkdir -p community/spellbook/ ;curl -L http://<s3_domain>/infra/spellbook/spellbook.tar | tar -C community/spellbook/ -xv;
 
+install_dependency:
+	yum install rhel-system-roles -y
+
 .cache:
 	mkdir -p .cache
 	

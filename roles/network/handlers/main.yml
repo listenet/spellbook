@@ -1,0 +1,8 @@
+---
+- import_tasks: reload_network_manager.yml
+  when: ansible_default_ipv4 is defined
+        and network_manager_status.rc == 0
+
+- import_tasks: reload_network.yml
+  when: ansible_default_ipv4 is defined
+        and network_status.rc == 0

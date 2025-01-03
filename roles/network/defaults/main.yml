@@ -1,0 +1,11 @@
+---
+check_network_server: true
+network_config_dns: false 
+network_manager_dns: false
+
+domain_name_server_ip: 
+  - "223.5.5.5"
+domain_name_options_timeout: "2"
+domain_name_options_attempts: "2"
+domain_name_options_search:
+  - "dns.v.com"

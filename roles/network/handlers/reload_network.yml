@@ -1,0 +1,7 @@
+---
+- name: Reload Network
+  systemd:
+    name: network
+    state: restarted
+  when: ansible_default_ipv4 is defined
+        and network_status.rc == 0

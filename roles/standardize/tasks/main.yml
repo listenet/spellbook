@@ -2,9 +2,6 @@
 - name: Gather facts
   setup:
 
-- import_tasks: resolv.yml
-  when: resolv_config
-
 - import_tasks: swap.yml
   when: swap_off
 
@@ -18,4 +15,10 @@
   when: install_nfs 
 
 - import_tasks: network.yml
+  vars:
+    - network_config_dns: true
   when: ansible_default_ipv4 is defined
+        and network_config == true
+
+- import_tasks: resolv.yml
+  when: resolv_config

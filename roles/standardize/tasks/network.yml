@@ -1,0 +1,4 @@
+---
+- name: Include tasks from network 
+  include_role:
+    name: network
