@@ -10,3 +10,10 @@
     name: nfs-utils
     state: present
   when: ansible_os_family == "RedHat"
+
+
+- name: Install rpcbind package 
+  yum:
+    name: rpcbind
+    state: present
+  when: ansible_os_family == "RedHat"
