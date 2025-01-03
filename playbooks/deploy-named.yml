@@ -2,7 +2,7 @@
 - hosts: dnsmaster
   gather_facts: False
   roles:
-    - named
+    - spellbook.named
   vars:
     - dns_master: true
     - dns_slave: false
@@ -12,7 +12,7 @@
 - hosts: dnsslave
   gather_facts: False
   roles:
-    - named
+    - spellbook.named
   vars:
     - dns_master: false
     - dns_slave: true

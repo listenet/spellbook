@@ -2,4 +2,4 @@
 - hosts: all
   gather_facts: False
   roles:
-    - network
+    - spellbook.network
