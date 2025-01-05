@@ -1,0 +1,56 @@
+---
+
+- name: Enable NIC bonding kernel module
+  modprobe:
+    name: bonding
+    state: present
+  when: spellbook_tuning_nic_bonding_slaves | length > 0 
+
+- name: Assert the default NIC is the first slave
+  assert:
+    that:
+    - spellbook_tuning_nic_bonding_slaves[0] == ansible_default_ipv4.interface
+    - spellbook_tuning_nic_bonding_mode is in ['0', '1', '2', '3', '4', '5']
+  when:
+  - spellbook_tuning_nic_bonding_slaves | length > 0 
+  - ansible_default_ipv4.interface != spellbook_tuning_nic_bonding_master
+
+- name: Configure the bonding master interface
+  template:
+    src: "ifcfg-bond.j2"
+    dest: "{{ spellbook_tuning_ifcfg }}{{ spellbook_tuning_nic_bonding_master }}"
+    backup: yes
+  when: spellbook_tuning_nic_bonding_slaves | length > 0 
+  notify: Restart network
+
+- name: Configure the bonding slave interface | Cleanup
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ item }}"
+    regexp: "^(IPADDR|NETMASK|GATEWAY|DNS\\d+)="
+    firstmatch: true
+    backup: yes
+    state: absent
+  loop: "{{ spellbook_tuning_nic_bonding_slaves }}"
+  notify: Restart network
+
+- name: Configure the bonding slave interface | Register master
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ item }}"
+    regexp: "^MASTER="
+    line: "MASTER={{ spellbook_tuning_nic_bonding_master }}"
+    firstmatch: true
+    backup: yes
+  loop: "{{ spellbook_tuning_nic_bonding_slaves }}"
+  notify: Restart network
+
+- name: Configure the bonding slave interface | Register slave
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-{{ item }}"
+    regexp: "^SLAVE="
+    line: "SLAVE=yes"
+    firstmatch: true
+    backup: yes
+  loop: "{{ spellbook_tuning_nic_bonding_slaves }}"
+  notify: Restart network
+
+- meta: flush_handlers

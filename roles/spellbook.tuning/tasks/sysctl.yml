@@ -1,0 +1,85 @@
+---
+
+- name: Load kernel modules
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - "{{ spellbook_tuning_modprobe }}"
+
+- name: Persist kernel modules
+  copy:
+    content: "{{ spellbook_tuning_modprobe | sort | join('\n') }}\n"
+    dest: "/etc/modules-load.d/spellbook-tuning.conf"
+
+- name: Calculate sysctl items
+  set_fact:
+    # yamllint disable-line rule:line-length
+    spellbook_tuning_netfilter_nf_conntrack_max: "{{ (ansible_processor_vcpus|int) * spellbook_tuning_netfilter_nf_conntrack_max_per_core }}"
+
+- name: delete config tcp_tw_recycle
+  lineinfile:
+    path: /etc/sysctl.conf
+    regexp: 'tcp_tw_recycle'
+    state: absent
+
+
+- name: Update sysctl items
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.conf
+  with_items:
+  - key: 'kernel.pid_max'
+    value: "{{ spellbook_tuning_pid_max }}"
+  - key: 'net.core.somaxconn'
+    value: "{{ spellbook_tuning_somaxconn }}"
+  - key: 'net.core.rmem_max'
+    value: "{{ spellbook_tuning_rmem_max }}"
+  - key: 'net.core.wmem_max'
+    value: "{{ spellbook_tuning_wmem_max }}"
+  - key: 'net.ipv4.tcp_rmem'
+    value: "{{ spellbook_tuning_tcp_rmem }}"
+  - key: 'net.ipv4.tcp_wmem'
+    value: "{{ spellbook_tuning_tcp_wmem }}"
+  - key: 'net.core.netdev_max_backlog'
+    value: "{{ spellbook_tuning_netdev_max_backlog }}"
+  - key: 'net.ipv4.ip_local_port_range'
+    value: "{{ spellbook_tuning_ip_local_port_range }}"
+  - key: 'net.ipv4.conf.all.promote_secondaries'
+    value: "{{ spellbook_tuning_promote_secondaries }}"
+  - key: 'vm.min_free_kbytes'
+    value: "{{ spellbook_tuning_min_free_kbytes }}"
+  - key: 'vm.swappiness'
+    value: "{{ spellbook_tuning_swappiness }}"
+  - key: 'vm.max_map_count'
+    value: "{{ spellbook_tuning_vm_max_map_count }}"
+  - key: 'net.ipv4.tcp_tw_reuse'
+    value: "{{ spellbook_tuning_tcp_tw_reuse }}"
+  - key: 'net.ipv4.ip_forward'
+    value: "{{ spellbook_tuning_ip_forward }}"
+  - key: 'net.ipv4.ip_local_reserved_ports'
+    value: "{{ spellbook_tuning_ip_local_reserved_ports }}"
+  - key: 'net.bridge.bridge-nf-call-iptables'
+    value: "{{ spellbook_tuning_bridge_nf_call_iptables }}"
+  - key: 'net.bridge.bridge-nf-call-arptables'
+    value: "{{ spellbook_tuning_bridge_nf_call_arptables }}"
+  - key: 'net.bridge.bridge-nf-call-ip6tables'
+    value: "{{ spellbook_tuning_bridge_nf_call_ip6tables }}"
+  - key: 'net.netfilter.nf_conntrack_max'
+    value: "{{ spellbook_tuning_netfilter_nf_conntrack_max }}"
+  - key: 'net.ipv4.neigh.default.gc_thresh1'
+    value: "{{ spellbook_tuning_ipv4_gc_thresh1 }}"
+  - key: 'net.ipv4.neigh.default.gc_thresh2'
+    value: "{{ spellbook_tuning_ipv4_gc_thresh2 }}"
+  - key: 'net.ipv4.neigh.default.gc_thresh3'
+    value: "{{ spellbook_tuning_ipv4_gc_thresh3 }}"
+  - key: 'net.ipv6.neigh.default.gc_thresh1'
+    value: "{{ spellbook_tuning_ipv6_gc_thresh1 }}"
+  - key: 'net.ipv6.neigh.default.gc_thresh2'
+    value: "{{ spellbook_tuning_ipv6_gc_thresh2 }}"
+  - key: 'net.ipv6.neigh.default.gc_thresh3'
+    value: "{{ spellbook_tuning_ipv6_gc_thresh3 }}"
+  - key: 'fs.inotify.max_user_watches'
+    value: "{{ spellbook_tuning_fs_inotify_max_user_watches }}"

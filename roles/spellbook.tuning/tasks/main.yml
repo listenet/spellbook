@@ -1,0 +1,12 @@
+---
+- name: Configure swap
+  import_tasks: swap.yml
+  tags: tuning-swap
+
+- name: Configure sysctl
+  import_tasks: sysctl.yml
+  tags: tuning-sysctl
+
+- name: Configure network
+  import_tasks: network.yml
+  tags: tuning-network

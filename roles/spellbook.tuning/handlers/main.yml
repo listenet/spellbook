@@ -1,0 +1,6 @@
+---
+
+- name: Restart network
+  systemd:
+    name: network.service
+    state: restarted

@@ -1,0 +1,13 @@
+DEVICE={{ spellbook_tuning_nic_bonding_master }}
+TYPE=Bond
+NAME={{ spellbook_tuning_nic_bonding_master }}
+BONDING_MASTER=yes
+BOOTPROTO=none
+ONBOOT=yes
+IPADDR={{ ansible_default_ipv4.address }}
+NETMASK={{ ansible_default_ipv4.netmask }}
+GATEWAY={{ ansible_default_ipv4.gateway }}
+BONDING_OPTS="mode={{ spellbook_tuning_nic_bonding_mode }}"
+{% for nameserver in ansible_dns.nameservers %}
+DNS{{ loop.index }}={{ nameserver }}
+{% endfor %}

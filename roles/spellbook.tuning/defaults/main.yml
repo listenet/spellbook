@@ -1,0 +1,39 @@
+---
+
+spellbook_tuning_modprobe:
+- 'br_netfilter'
+- 'ip_conntrack'
+
+spellbook_tuning_pid_max: 4194304
+spellbook_tuning_somaxconn: 65535
+spellbook_tuning_rmem_max: 25165824
+spellbook_tuning_wmem_max: 25165824
+spellbook_tuning_tcp_rmem: '4096 87380 16777216'
+spellbook_tuning_tcp_wmem: '4096 87380 16777216'
+spellbook_tuning_netdev_max_backlog: 2500
+spellbook_tuning_ip_local_port_range: '12000 65535'
+spellbook_tuning_promote_secondaries: 1
+spellbook_tuning_min_free_kbytes: 524288
+spellbook_tuning_vm_max_map_count: 65536
+spellbook_tuning_swappiness: 0
+spellbook_tuning_tcp_tw_reuse: 0
+spellbook_tuning_ip_forward: 0
+spellbook_tuning_ip_local_reserved_ports: '30000-32767'
+spellbook_tuning_bridge_nf_call_iptables: 1
+spellbook_tuning_bridge_nf_call_arptables: 1
+spellbook_tuning_bridge_nf_call_ip6tables: 1
+spellbook_tuning_netfilter_nf_conntrack_max_per_core: 32768
+spellbook_tuning_ipv4_gc_thresh1: 30000
+spellbook_tuning_ipv4_gc_thresh2: 32000
+spellbook_tuning_ipv4_gc_thresh3: 32768
+spellbook_tuning_ipv6_gc_thresh1: 30000
+spellbook_tuning_ipv6_gc_thresh2: 32000
+spellbook_tuning_ipv6_gc_thresh3: 32768
+
+spellbook_tuning_raid_force_writeback: false
+
+spellbook_tuning_nic_bonding_mode: "4"  # 802.3ad
+spellbook_tuning_nic_bonding_master: "bond0"
+spellbook_tuning_nic_bonding_slaves: []
+
+spellbook_tuning_fs_inotify_max_user_watches: 163840  # CentOS default: 8192
