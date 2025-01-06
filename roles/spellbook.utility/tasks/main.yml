@@ -1,0 +1,22 @@
+---
+
+- name: Install utility packages from yum repo
+  yum:
+    name:
+    - vim
+    - strace
+    - lsof
+    - mtr
+    - bind-utils
+    - tcpdump
+    - telnet
+    - tree
+    - pciutils
+    - jq
+    - psmisc
+    - conntrack-tools
+    - net-tools
+    - smartmontools
+    - lftp
+    state: present
+    update_cache: yes
