@@ -4,7 +4,7 @@
     name: "{{ item }}"
     state: stopped
     enabled: no
-  with_items:
+  loop:
     - kubelet
     - docker
   when: (clean_kubenets_master == true or clean_kubenets_node == true) and ansible_os_family == "RedHat"
@@ -14,6 +14,6 @@
     name: "{{ item }}"
     state: stopped
     enabled: no
-  with_items:
+  loop:
     - etcd 
   when: clean_kubenets_master == true and ansible_os_family == "RedHat"

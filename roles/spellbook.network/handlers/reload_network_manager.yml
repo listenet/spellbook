@@ -1,7 +1,7 @@
 ---
 - name: Reload NetworkManager
   command: "{{ item }}"
-  with_items:
+  loop:
     - "nmcli c reload"
     - "nmcli c up {{ ansible_default_ipv4.interface }}"
   when: ansible_default_ipv4 is defined
