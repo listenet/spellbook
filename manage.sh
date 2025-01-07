@@ -63,6 +63,8 @@ venv_install() {
   VENV_CHECKSUM="$(cat 2>/dev/null "${VENV_CHECKSUM_FILE}" || true)"
   if [ "$(venv_checksum)" != "${VENV_CHECKSUM}" ]; then
       "${VENV_DIR}/bin/pip" install pip=="21.0.1" -i https://pypi.tuna.tsinghua.edu.cn/simple
+      "${VENV_DIR}/bin/python3" -m pip install --upgrade pip
+      "${VENV_DIR}/bin/pip-compile" --index-url=https://pypi.tuna.tsinghua.edu.cn/simple/ --no-emit-index-url requirements.in
       "${VENV_DIR}/bin/pip" install -r "${ROOT_DIR}/requirements.txt"
       "${VENV_DIR}/bin/pip-compile" --no-emit-index-url requirements.in
       "${VENV_DIR}/bin/pip-sync"
