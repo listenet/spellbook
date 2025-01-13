@@ -22,6 +22,14 @@
     owner: root
     group: root
 
+- name: copy veleroo script
+  template:
+    src: "veleroo.j2"
+    dest: "{{ spellbook_velero_bin_dir }}/veleroo"
+    mode: 0770
+    owner: root
+    group: root 
+
 - name: copy velero auth file 
   template:
     src: "velero-auth.txt.j2"
@@ -31,4 +39,4 @@
     group: root 
 
 - name: Install velero
-  shell: "{{ spellbook_velero_bin_dir }}/velero --kubeconfig ~/.kube/config install --provider aws --image {{ spellbook_registry }}/{{ spellbook_velero_image }}:{{ spellbook_velero_version }}  --plugins {{ spellbook_registry }}/{{ spellbook_velero_plugin_for_aws_image }}:{{ spellbook_velero_plugin_for_aws_version }}  --bucket {{ spellbook_velero_backup_bucket }} --secret-file {{ spellbook_velero_auth_file }}  --use-volume-snapshots=false --namespace {{ spellbook_velero_backup_namespace }} --backup-location-config region=us-east-1,s3ForcePathStyle='true',s3Url={{ spellbook_velero_backup_url }}"
+  shell: "{{ spellbook_velero_bin_dir }}/velero --kubeconfig ~/.kube/config install --provider aws --image {{ spellbook_registry }}/{{ spellbook_velero_image }}:{{ spellbook_velero_version }}  --plugins {{ spellbook_registry }}/{{ spellbook_velero_plugin_for_aws_image }}:{{ spellbook_velero_plugin_for_aws_version }}  --bucket {{ spellbook_velero_s3_bucket }} --secret-file {{ spellbook_velero_auth_file }}  --use-volume-snapshots=false --namespace {{ spellbook_velero_namespace }} --backup-location-config region={{ spellbook_velero_s3_region }},s3ForcePathStyle='{{ spellbook_velero_s3_force_path_style }}',s3Url={{ spellbook_velero_s3_url }}"

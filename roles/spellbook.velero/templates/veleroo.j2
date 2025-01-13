@@ -1,0 +1,2 @@
+#!/bin/bash
+exec {{ spellbook_velero_bin_dir }}/velero --kubeconfig ~/.kube/config -n {{ spellbook_velero_namespace }} "$@"

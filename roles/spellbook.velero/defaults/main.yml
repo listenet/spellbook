@@ -1,17 +1,25 @@
 ---
+
+spellbook_velero_namespace: velero
+spellbook_velero_s3_url: s3.dns.v.com
+spellbook_velero_s3_bucket: velerodata_bak
+spellbook_velero_s3_access_key: placeholder_test_ak
+spellbook_velero_s3_secret_key: placeholder_test_sk
+
 spellbook_velero_download_url: https://github.com/vmware-tanzu/velero/releases/download/v1.8.1/{{ spellbook_velero_release_version }}.tar.gz
+
 spellbook_velero_release_version: velero-v1.8.1-linux-amd64
-spellbook_velero_work_dir: /tmp/velero
-spellbook_velero_bin_dir: /usr/local/bin
 spellbook_registry: registry.cn-beijing.aliyuncs.com/spellbook
 spellbook_velero_image: velero
 spellbook_velero_version: v1.8.1
 spellbook_velero_plugin_for_aws_image: velero-plugin-for-aws
 spellbook_velero_plugin_for_aws_version: v1.3.1
-spellbook_velero_backup_bucket: velerodata_bak
-spellbook_velero_auth_file: /etc/secret/velero-auth.txt
-spellbook_velero_backup_namespace: velero
-spellbook_velero_backup_url: s3.v.com
 
-spellbook_velero_access_key: placeholder_test_ak
-spellbook_velero_secret_key: placeholder_test_sk
+spellbook_velero_s3_force_path_style: true
+spellbook_velero_s3_region: us-east-1
+
+
+spellbook_velero_auth_file: /etc/secret/velero-auth.txt
+
+spellbook_velero_work_dir: /tmp/velero
+spellbook_velero_bin_dir: /usr/local/bin
