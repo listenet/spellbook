@@ -1,14 +1,14 @@
 - import_tasks: install.yml
   when: 
-    dns_master == true
-    or dns_slave == true
+    spellbook_dns_master == true
+    or spellbook_dns_slave == true
 
 - import_tasks: config.yml
   when: 
-    dns_master == true
-    or dns_slave == true 
+    spellbook_dns_master == true
+    or spellbook_dns_slave == true 
 
 - import_tasks: add_zone.yml
   when: 
-    dns_master == true
-    or dns_slave == true
+    spellbook_dns_master == true
+    or spellbook_dns_slave == true

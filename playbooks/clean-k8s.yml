@@ -5,7 +5,7 @@
   roles:
     - spellbook.clean_kubernets
   vars:
-    - clean_kubenets_node: true
+    - spellbook_clean_kubenets_node: true
   tags:
     - clean_k8s
 
@@ -16,6 +16,6 @@
   roles:
     - spellbook.clean_kubernets
   vars:
-    - clean_kubenets_master: true
+    - spellbook_clean_kubenets_master: true
   tags:
     - clean_k8s

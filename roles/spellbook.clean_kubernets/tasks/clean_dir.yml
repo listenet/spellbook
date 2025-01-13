@@ -8,4 +8,4 @@
     - /root/.kube
     - /var/lib/etcd
     - /etc/cni/net.d
-  when: clean_kubenets_master == true or clean_kubenets_node == true
+  when: spellbook_clean_kubenets_master == true or spellbook_clean_kubenets_node == true

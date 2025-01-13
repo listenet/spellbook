@@ -1,2 +1,2 @@
-clean_kubenets_node: false
-clean_kubenets_master: false
+spellbook_clean_kubenets_node: false
+spellbook_clean_kubenets_master: false

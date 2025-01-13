@@ -1,18 +1,18 @@
-forwarder_list:
+spellbook_forwarder_list:
   - 223.5.5.5
-zones_list: 
+spellbook_zones_list: 
   - dns.v.com
 
-slaves_list:
+spellbook_slaves_list:
   - 192.168.2.11
   - 192.168.2.12
-internal_list:
+spellbook_internal_list:
   - 10.0.0.0/8
   - 172.16.0.0/12
   - 192.168.0.0/16
-dns_masters_list: 
+spellbook_dns_masters_list: 
   - "192.168.2.11"
-dns_v_records:
+spellbook_dns_v_records:
   - "ns1              IN  A     192.168.2.11"
   - "ns2              IN  A     192.168.2.12"
   - "www              IN  A     192.168.2.11"

@@ -1,4 +1,4 @@
 ---
 - name: Instant sync time 
   command: "chronyc makestep"
-  with_sequence: start=1 end={{chronyc_run_num}}
+  with_sequence: start=1 end={{spellbook_chronyc_run_num}}

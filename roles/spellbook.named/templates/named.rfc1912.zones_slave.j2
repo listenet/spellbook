@@ -38,12 +38,12 @@ view internal {
 		allow-update { none; };
 	};
 	
-{% for zonename in zones_list %}
+{% for zonename in spellbook_zones_list %}
 	zone "{{ zonename }}" IN {
 		type slave;
         masters {
-{% for dns_master in dns_masters_list %}
-			{{ dns_master }};
+{% for spellbook_dns_master in spellbook_dns_masters_list %}
+			{{ spellbook_dns_master }};
 {% endfor %}
         };
 		file "{{ zonename }}.zone";

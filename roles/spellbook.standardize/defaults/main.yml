@@ -1,16 +1,16 @@
-resolv_config: false 
-network_config: false 
-swap_off: true
-firewalld_off: true
-instant_sync_time: false
-chronyc_run_num: 3
-install_nfs: false
+spellbook_resolv_config: false 
+spellbook_network_config: false 
+spellbook_swap_off: true
+spellbook_firewalld_off: true
+spellbook_instant_sync_time: false
+spellbook_chronyc_run_num: 3
+spellbook_install_nfs: false
 
-resolv_path: "/etc/resolv.conf"
+spellbook_resolv_path: "/etc/resolv.conf"
 
-domain_name_server_ip: 
+spellbook_domain_name_server_ip: 
   - "223.5.5.5"
-domain_name_options_timeout: "2"
-domain_name_options_attempts: "2"
-domain_name_options_search:
+spellbook_domain_name_options_timeout: "2"
+spellbook_domain_name_options_attempts: "2"
+spellbook_domain_name_options_search:
   - "dns.v.com"

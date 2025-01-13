@@ -22,7 +22,7 @@
     - named.rfc1912.zones.j2
   notify: 
     - Reload named daemon
-  when: dns_master == true
+  when: spellbook_dns_master == true
 
 - name: Config named.rfc1912.zones_slave to bind9
   template:
@@ -35,4 +35,4 @@
     - named.rfc1912.zones_slave.j2
   notify: 
     - Reload named daemon
-  when: dns_slave == true
+  when: spellbook_dns_slave == true

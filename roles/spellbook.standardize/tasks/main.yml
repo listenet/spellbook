@@ -3,22 +3,22 @@
   setup:
 
 - import_tasks: swap.yml
-  when: swap_off
+  when: spellbook_swap_off
 
 - import_tasks: firewalld.yml
-  when: firewalld_off
+  when: spellbook_firewalld_off
 
 - import_tasks: chronyc.yml
-  when: instant_sync_time
+  when: spellbook_instant_sync_time
 
 - import_tasks: nfs-client.yml
-  when: install_nfs 
+  when: spellbook_install_nfs 
 
 - import_tasks: network.yml
   vars:
-    - network_config_dns: true
+    - spellbook_network_config_dns: true
   when: ansible_default_ipv4 is defined
-        and network_config == true
+        and spellbook_network_config == true
 
 - import_tasks: resolv.yml
-  when: resolv_config
+  when: spellbook_resolv_config

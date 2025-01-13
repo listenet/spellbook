@@ -1,11 +1,11 @@
 acl internal {
-{% for ip in internal_list %}
+{% for ip in spellbook_internal_list %}
 	{{ ip }};
 {% endfor %}
 };
 
 acl slaves {
-{% for ip in slaves_list %}
+{% for ip in spellbook_slaves_list %}
 	{{ ip }};
 {% endfor %}
 };
@@ -16,7 +16,7 @@ options {
 	allow-query     { any; };
 	forward         only;
 	forwarders      { 
-{% for ip in forwarder_list %}
+{% for ip in spellbook_forwarder_list %}
         	{{ ip }};
 {% endfor %}
         };

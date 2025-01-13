@@ -38,7 +38,7 @@ view internal {
 		allow-update { none; };
 	};
 	
-{% for zonename in zones_list %}
+{% for zonename in spellbook_zones_list %}
 	zone "{{ zonename }}" IN {
 		type master;
 		file "{{ zonename }}.zone";

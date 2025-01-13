@@ -1,2 +1,2 @@
-kubeadm_bin_dir: /usr/local/bin
-iptables_bin_dir: /sbin
+spellbook_kubeadm_bin_dir: /usr/local/bin
+spellbook_iptables_bin_dir: /sbin
