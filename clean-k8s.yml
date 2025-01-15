@@ -1,0 +1,4 @@
+---
+
+- name: Clean kubernets
+  import_playbook: playbooks/clean-k8s.yml

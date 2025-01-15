@@ -1,0 +1,4 @@
+- name: Make sure the ansile.builtin.systemd_service module exists
+  ansible.builtin.package:
+    name: ansible
+    state: present

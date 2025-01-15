@@ -1,0 +1,4 @@
+---
+
+- name: Network configure 
+  import_playbook: playbooks/network.yml 

@@ -24,6 +24,9 @@ pip_compile:
 submodule_update:
 	./manage.sh submodule_update
 
+run_ansible_daemon:
+	docker run --rm -itd --network host --mount type=bind,source="$(pwd)"/,dst=/root/v/   --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa   registry.cn-beijing.aliyuncs.com/spellbook/ansible:v2.16.14 bash
+
 .cache:
 	mkdir -p .cache
 	

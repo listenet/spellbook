@@ -1,0 +1,3 @@
+---
+- name: Scale the cluster
+  import_playbook: playbooks/scale-k8s.yml
