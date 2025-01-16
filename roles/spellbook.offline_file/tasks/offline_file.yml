@@ -1,10 +1,7 @@
 ---
-- hosts: localhost
-  become: yes
-  tasks:
-  - name: Start off line file repot container 
-    docker_container:
-      name: offline_file 
-      image: {{ spellbook_offline_file_image_register }}
-      ports: 80:80
-      state: started
+- name: Start offline file repot container 
+  docker_container:
+    name: offline_file 
+    image: "{{ spellbook_offline_file_image_register }}"
+    ports: 80:80
+    state: started
