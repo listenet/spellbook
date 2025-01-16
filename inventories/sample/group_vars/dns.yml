@@ -24,3 +24,4 @@ spellbook_dns_v_records:
   - "v1-test-k8s-191  IN  A     192.168.2.191"
   - "v1-test-k8s-192  IN  A     192.168.2.192"
   - "v1-test-route-254  IN  A     192.168.2.254"
+  - "offline-file     IN  A     192.168.2.12"
