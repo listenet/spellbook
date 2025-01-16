@@ -27,6 +27,9 @@ submodule_update:
 run_ansible_daemon:
 	docker run --rm -itd --network host --mount type=bind,source="$(pwd)"/,dst=/root/v/   --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa   registry.cn-beijing.aliyuncs.com/spellbook/ansible:v2.16.14 bash
 
+run_offline_file_daemon:
+	docker run --rm -itd -p 80:80 registry.cn-beijing.aliyuncs.com/spellbook/offline-file:nginx-v1.0.0
+
 .cache:
 	mkdir -p .cache
 	
