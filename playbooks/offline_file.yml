@@ -1,0 +1,6 @@
+- hosts:
+    - offline
+  become: yes
+  become_user: root
+  roles:
+    - spellbook.offline_file
