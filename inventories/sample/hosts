@@ -18,7 +18,7 @@ v1-test-k8s-201 ansible_host=192.168.2.201
 v1-test-k8s-191 ansible_host=192.168.2.191
 v1-test-k8s-192 ansible_host=192.168.2.192
 
-[kube:children]
+[kube_cluster:children]
 kube_control_plane
 kube_node
 

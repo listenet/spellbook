@@ -1,4 +1,7 @@
 ---
 
+- name: remove kubernets
+  import_playbook: community/kubespray/playbooks/remove_node.yml
+
 - name: Clean kubernets
   import_playbook: playbooks/clean-k8s.yml

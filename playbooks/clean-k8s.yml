@@ -1,5 +1,5 @@
 - hosts:
-    - kubenode
+    - kube_node
   become: yes
   become_user: root
   roles:
@@ -10,7 +10,7 @@
     - clean_k8s
 
 - hosts:
-    - kubemaster
+    - kube_control_plane
   become: yes
   become_user: root
   roles:

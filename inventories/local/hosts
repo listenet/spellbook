@@ -8,3 +8,7 @@ node1
 
 [kube_node]
 node1
+
+[kube_cluster]
+kube_control_plane
+kube_node

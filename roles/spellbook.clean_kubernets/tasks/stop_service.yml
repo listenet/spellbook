@@ -7,7 +7,9 @@
   loop:
     - kubelet
     - docker
+    - containerd
   when: (spellbook_clean_kubenets_master == true or spellbook_clean_kubenets_node == true) and ansible_os_family == "RedHat"
+  ignore_errors: true 
 
 - name: Ensure that the master node etcd service is stopped
   systemd:

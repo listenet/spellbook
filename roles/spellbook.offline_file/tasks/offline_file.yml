@@ -1,7 +1,10 @@
 ---
+- name: Install docker
+  dnf:
+    name:
+    - docker
+    state: present
+    update_cache: yes
+
 - name: Start offline file repot container 
-  docker_container:
-    name: offline_file 
-    image: "{{ spellbook_offline_file_image_register }}"
-    ports: 80:80
-    state: started
+  command: docker run --rm -itd -p 80:80 registry.cn-beijing.aliyuncs.com/spellbook/offline-file:nginx-v1.0.0
