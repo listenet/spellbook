@@ -22,8 +22,8 @@ v1-test-k8s-192 ansible_host=192.168.2.192
 kube_control_plane
 kube_node
 
-[etcd]
-v1-test-k8s-201 ansible_host=192.168.2.201
+[etcd:children]
+kube_control_plane
 
 [offline]
 v1-test-dns-12
