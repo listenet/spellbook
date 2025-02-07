@@ -1,4 +1,12 @@
 ---
+
+# Calico network backend can be 'bird', 'vxlan' and 'none'
+calico_network_backend: bird
+
+# Global as_num (/calico/bgp/v1/global/as_num)
+global_as_num: "64515"
+local_as: "64515"
+
 # Kubernetes configuration dirs and system namespace.
 # Those are where all the additional config stuff goes
 # the kubernetes normally puts in /srv/kubernetes.
