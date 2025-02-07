@@ -2,3 +2,4 @@
 - name: reset kubelet 
   command: "{{ spellbook_kubeadm_bin_dir }}/kubeadm reset -f"
   when: spellbook_clean_kubenets_node == true or spellbook_clean_kubenets_master==true
+  ignore_errors: true
