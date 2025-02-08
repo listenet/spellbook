@@ -1,17 +1,10 @@
 ---
 
-# Calico network backend can be 'bird', 'vxlan' and 'none'
-calico_network_backend: bird
-
-# Global as_num (/calico/bgp/v1/global/as_num)
-global_as_num: "64515"
-local_as: "64515"
-
 # Kubernetes configuration dirs and system namespace.
 # Those are where all the additional config stuff goes
 # the kubernetes normally puts in /srv/kubernetes.
 # This puts them in a sane location and namespace.
-# Editing those values will almost surely break something.
+# Editing those values will almost surely break something449512c456f8roles/spellbook.clean_kubernets/tasks/kubelet_reset.yml.
 kube_config_dir: /etc/kubernetes
 kube_script_dir: "{{ bin_dir }}/kubernetes-scripts"
 kube_manifest_dir: "{{ kube_config_dir }}/manifests"

@@ -1,4 +1,27 @@
 ---
+
+- hosts:
+  - k8s_cluster
+  pre_tasks:
+  - name: Wait for the BGP neighbor
+    wait_for:
+      host: "{{ item.router_id }}"
+      port: 179
+      state: started
+      timeout: 1
+    register: wait_for_result
+    ignore_errors: yes
+    loop: "{{ peers }}"
+    when:
+      - peers is defined
+  - name: Assert the BGP neighbor | You may set bgp peer config 
+    assert:
+      that:
+      - wait_for_result.results|select('succeeded')|list is not empty
+      msg: "At least one BGP peer is expected to be accessible."
+    when:
+      - peers is defined
+
 - name: Common tasks for every playbooks
   import_playbook: boilerplate.yml
 

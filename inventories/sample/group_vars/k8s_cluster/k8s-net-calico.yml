@@ -1,4 +1,28 @@
 ---
+
+peers:
+  - router_id: "{{ ansible_default_ipv4.gateway|ansible.utils.ipmath(+252) }}"
+    as: "{{ global_as_num }}"
+    scope: global
+    filters: []
+    numallowedlocalasnumbers: 0
+    sourceaddress: "None"
+
+# Set calico network backend: "bird", "vxlan" or "none"
+# bird enable BGP routing, required for ipip and no encapsulation modes
+calico_network_backend: bird
+
+# Global as_num (/calico/bgp/v1/global/as_num)
+global_as_num: "64515"
+local_as: "64515"
+
+# IP in IP and VXLAN is mutually exclusive modes.
+# set IP in IP encapsulation mode: "Always", "CrossSubnet", "Never"
+calico_ipip_mode: 'Never'
+
+# set VXLAN encapsulation mode: "Always", "CrossSubnet", "Never"
+calico_vxlan_mode: 'Never'
+
 # see roles/network_plugin/calico/defaults/main.yml
 
 # the default value of name
@@ -7,7 +31,7 @@ calico_cni_name: k8s-pod-network
 ## With calico it is possible to distributed routes with border routers of the datacenter.
 ## Warning : enabling router peering will disable calico's default behavior ('node mesh').
 ## The subnets of each nodes will be distributed by the datacenter router
-# peer_with_router: false
+peer_with_router: true
 
 # Enables Internet connectivity from containers
 # nat_outgoing: true
@@ -85,16 +109,7 @@ calico_pool_blocksize: 26
 # Set max typha connections
 # typha_max_connections_lower_limit: 300
 
-# Set calico network backend: "bird", "vxlan" or "none"
-# bird enable BGP routing, required for ipip and no encapsulation modes
-# calico_network_backend: vxlan
 
-# IP in IP and VXLAN is mutually exclusive modes.
-# set IP in IP encapsulation mode: "Always", "CrossSubnet", "Never"
-# calico_ipip_mode: 'Never'
-
-# set VXLAN encapsulation mode: "Always", "CrossSubnet", "Never"
-# calico_vxlan_mode: 'Always'
 
 # set VXLAN port and VNI
 # calico_vxlan_vni: 4096
