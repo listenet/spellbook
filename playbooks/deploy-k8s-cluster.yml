@@ -115,3 +115,12 @@
   roles:
     - { role: kubespray-defaults }
     - { role: kubernetes/preinstall, when: "dns_mode != 'none' and resolvconf_mode == 'host_resolvconf'", tags: resolvconf, dns_late: true }
+
+- name: Set alias kc with 'kubectl'
+  hosts: kube_control_plane
+  tasks:
+    - name: Set alias kc with 'kubectl' to .bashrc
+      lineinfile:
+        path: /root/.bashrc
+        line: "alias kc='kubectl'"
+        state: present
