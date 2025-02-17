@@ -87,7 +87,7 @@ cilium_deploy_additionally: false
 # You wil also have to specify the variable `cilium_native_routing_cidr` to
 # make this work. Please refer to the cilium documentation for more
 # information about this kind of setups.
-cilium_auto_direct_node_routes: true 
+cilium_auto_direct_node_routes: false 
 
 # Allows to explicitly specify the IPv4 CIDR for native routing.
 # When specified, Cilium assumes networking for this CIDR is preconfigured and
@@ -181,7 +181,7 @@ cilium_ip_masq_agent_enable: false
 # IP address management mode for v1.9+.
 # https://docs.cilium.io/en/v1.9/concepts/networking/ipam/
 #cilium_ipam_mode: cluster-pool
-cilium_ipam_mode: kubernetes
+cilium_ipam_mode: cluster-pool
 
 # Extra arguments for the Cilium agent
 # cilium_agent_custom_args: []
@@ -302,10 +302,6 @@ cilium_bgp_advertisements:
       advertise: bgp
     spec:
       advertisements:
-#        - advertisementType: "PodCIDR"
-#          attributes:
-#            communities:
-#              standard: [ "{{ spellbook_global_asn }}:99" ]
         - advertisementType: "CiliumPodIPPool"
           selector:
             matchExpressions:
@@ -338,7 +334,7 @@ cilium_bgp_peering_policies:
     spec:
       virtualRouters:
         - localASN: "{{ spellbook_global_asn }}"
-          exportPodCIDR: false
+          exportPodCIDR: true
           neighbors:
           - peerAddress: '{{ ansible_default_ipv4.gateway|ansible.utils.ipmath(+252) }}/24'
             peerASN: "{{ spellbook_global_asn }}"
