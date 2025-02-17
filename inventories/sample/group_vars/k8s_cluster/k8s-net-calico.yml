@@ -13,8 +13,8 @@ peers:
 calico_network_backend: bird
 
 # Global as_num (/calico/bgp/v1/global/as_num)
-global_as_num: "64515"
-local_as: "64515"
+global_as_num: "{{ spellbook_global_asn }}"
+local_as: "{{ spellbook_global_asn }}"
 
 # IP in IP and VXLAN is mutually exclusive modes.
 # set IP in IP encapsulation mode: "Always", "CrossSubnet", "Never"
@@ -34,10 +34,10 @@ calico_cni_name: k8s-pod-network
 peer_with_router: true
 
 # Enable eBPF mode  
-calico_bpf_enabled: false
+calico_bpf_enabled: true
 
 # Valid option for service mode: Tunnel (default), DSR=Direct Server Return
-calico_bpf_service_mode: Tunnel
+calico_bpf_service_mode: DSR
 
 # Enables Internet connectivity from containers
 # nat_outgoing: true
@@ -84,11 +84,11 @@ calico_pool_blocksize: 26
 # calico_veth_mtu: 1440
 
 # Advertise Cluster IPs
-# calico_advertise_cluster_ips: true
+calico_advertise_cluster_ips: false
 
 # Advertise Service External IPs
-# calico_advertise_service_external_ips:
-# - x.x.x.x/24
+#calico_advertise_service_external_ips:
+#- 10.233.64.0/18
 # - y.y.y.y/32
 
 # Advertise Service LoadBalancer IPs

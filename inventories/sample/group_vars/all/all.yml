@@ -17,6 +17,8 @@ spellbook_domain_name_options_attempts: "2"
 spellbook_domain_name_options_search:
   - "dns.v.com"
 
+spellbook_global_asn: 64515
+
 ## Directory where the binaries will be installed
 bin_dir: /usr/local/bin
 

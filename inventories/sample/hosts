@@ -26,12 +26,14 @@ v1-test-dns-12 ansible_host=192.168.2.12
 dnsmaster
 dnsslave
 
+[k8s_cluster:children]
+kube_control_plane
+kube_node
+
 [kube_control_plane]
 v1-test-k8s-201 ansible_host=192.168.2.201
 
 [kube_node]
-v1-test-k8s-191 ansible_host=192.168.2.191
-v1-test-k8s-192 ansible_host=192.168.2.192
 
 [etcd]
 v1-test-k8s-201

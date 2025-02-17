@@ -1,5 +1,17 @@
 ---
 
+# Minimal memory requirement in MB for safety checks
+minimal_node_memory_mb: 1024
+minimal_master_memory_mb: 1024
+
+kubelet_config_extra_args:
+  evictionHard:
+    memory.available: "128Mi"
+  evictionSoftGracePeriod:
+    memory.available: "30s"
+  evictionSoft:
+    memory.available: "256Mi"
+
 # Kubernetes configuration dirs and system namespace.
 # Those are where all the additional config stuff goes
 # the kubernetes normally puts in /srv/kubernetes.
@@ -68,7 +80,7 @@ credentials_dir: "{{ inventory_dir }}/credentials"
 
 # Choose network plugin (cilium, calico, kube-ovn, weave or flannel. Use cni for generic cni plugin)
 # Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
-kube_network_plugin: calico
+kube_network_plugin: cilium
 
 # Setting multi_networking to true will install Multus: https://github.com/k8snetworkplumbingwg/multus-cni
 kube_network_plugin_multus: false
@@ -157,14 +169,14 @@ kube_encrypt_secret_data: false
 cluster_name: cluster.local
 # Subdomains of DNS domain to be resolved via /etc/resolv.conf for hostnet pods
 ndots: 2
-# dns_timeout: 2
-# dns_attempts: 2
+dns_timeout: 2
+dns_attempts: 2
 # Custom search domains to be added in addition to the default cluster search domains
-# searchdomains:
-#   - svc.{{ cluster_name }}
-#   - default.svc.{{ cluster_name }}
+searchdomains:
+  - svc.{{ cluster_name }}
+  - default.svc.{{ cluster_name }}
 # Remove default cluster search domains (``default.svc.{{ dns_domain }}, svc.{{ dns_domain }}``).
-# remove_default_searchdomains: false
+remove_default_searchdomains: true
 # Can be coredns, coredns_dual, manual or none
 dns_mode: coredns
 # Set manual server if using a custom cluster DNS server
