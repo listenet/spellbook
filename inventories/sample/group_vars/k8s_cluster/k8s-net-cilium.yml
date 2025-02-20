@@ -183,6 +183,9 @@ cilium_ip_masq_agent_enable: false
 #cilium_ipam_mode: cluster-pool
 cilium_ipam_mode: cluster-pool
 
+### Set the Pod CIDR size of a node
+cilium_pool_mask_size: "24"
+
 # Extra arguments for the Cilium agent
 # cilium_agent_custom_args: []
 
