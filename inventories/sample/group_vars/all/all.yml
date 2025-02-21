@@ -19,7 +19,7 @@ spellbook_domain_name_options_search:
 
 spellbook_global_asn: 64515
 
-spellbook_ntp_enabled: false
+spellbook_ntp_enabled: true
 spellbook_ntp_servers:
   - "ntp.aliyun.com iburst"
 spellbook_ntp_timezone: "Asia/Shanghai"
