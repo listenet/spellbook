@@ -1,0 +1,88 @@
+---
+
+- name: Ensure NTP package
+  package:
+    name:
+      - "{{ spellbook_ntp_package }}"
+    state: present
+  when:
+    - not ansible_os_family in ["Flatcar", "Flatcar Container Linux by Kinvolk"]
+
+- name: Disable systemd-timesyncd
+  service:
+    name: systemd-timesyncd.service
+    enabled: false
+    state: stopped
+  failed_when: false
+
+- name: Set fact NTP settings
+  set_fact:
+    # noqa: jinja[spacing]
+    spellbook_ntp_config_file: >-
+      {% if spellbook_ntp_package == "ntp" -%}
+      /etc/ntp.conf
+      {%- elif spellbook_ntp_package == "ntpsec" -%}
+      /etc/ntpsec/ntp.conf
+      {%- elif ansible_os_family in ['RedHat', 'Suse'] -%}
+      /etc/chrony.conf
+      {%- else -%}
+      /etc/chrony/chrony.conf
+      {%- endif -%}
+    # noqa: jinja[spacing]
+    spellbook_ntp_service_name: >-
+      {% if spellbook_ntp_package == "chrony" -%}
+      chronyd
+      {%- elif ansible_os_family in ["Flatcar", "Flatcar Container Linux by Kinvolk", "RedHat", "Suse"] -%}
+      ntpd
+      {%- else -%}
+      ntp
+      {%- endif %}
+
+- name: Generate NTP configuration file.
+  template:
+    src: "{{ spellbook_ntp_config_file | basename }}.j2"
+    dest: "{{ spellbook_ntp_config_file }}"
+    mode: "0644"
+  notify: Preinstall | restart ntp
+  when:
+    - spellbook_ntp_manage_config
+
+- name: Stop the NTP Deamon For Sync Immediately   # `ntpd -gq`,`chronyd -q` requires the ntp daemon stop
+  service:
+    name: "{{ spellbook_ntp_service_name }}"
+    state: stopped
+  when:
+    - spellbook_ntp_force_sync_immediately
+
+- name: Force Sync NTP Immediately
+  # noqa: jinja[spacing]
+  command: >-
+      timeout -k 60s 60s
+      {% if spellbook_ntp_package == "chrony" -%}
+      chronyd -q
+      {%- else -%}
+      ntpd -gq
+      {%- endif -%}
+  when:
+    - spellbook_ntp_force_sync_immediately
+
+- name: Ensure NTP service is started and enabled
+  service:
+    name: "{{ spellbook_ntp_service_name }}"
+    state: started
+    enabled: true
+
+- name: Ensure tzdata package
+  package:
+    name:
+      - tzdata
+    state: present
+  when:
+    - spellbook_ntp_timezone
+    - not ansible_os_family in ["Flatcar", "Flatcar Container Linux by Kinvolk"]
+
+- name: Set timezone
+  community.general.timezone:
+    name: "{{ spellbook_ntp_timezone }}"
+  when:
+    - spellbook_ntp_timezone

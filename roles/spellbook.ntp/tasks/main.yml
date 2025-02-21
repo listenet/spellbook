@@ -1,0 +1,7 @@
+---
+# handlers file for roles/spellbook.ntp
+
+- name: Configure NTP
+  import_tasks: ntp_configurations.yml
+  when:
+    - spellbook_ntp_enabled

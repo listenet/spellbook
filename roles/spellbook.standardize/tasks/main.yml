@@ -11,7 +11,7 @@
 - import_tasks: chronyc.yml
   when: spellbook_instant_sync_time
 
-- import_tasks: nfs-client.yml
+- import_tasks: nfs_client.yml
   when: spellbook_install_nfs 
 
 - import_tasks: network.yml

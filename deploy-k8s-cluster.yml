@@ -1,3 +1,0 @@
----
-- name: Install Kubernetes
-  import_playbook: playbooks/deploy-k8s-cluster.yml

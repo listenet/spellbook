@@ -1,4 +1,0 @@
----
-
-- name: Deploy velero
-  import_playbook: playbooks/deploy-velero.yml 

@@ -1,0 +1,51 @@
+---
+# defaults file for roles/spellbook.ntp
+
+## NTP Settings
+# Start the ntpd or chrony service and enable it at system boot.
+spellbook_ntp_enabled: false
+# The package to install which provides NTP functionality.
+# The default is ntp for most platforms, or chrony on RHEL/CentOS 7 and later.
+# The spellbook_ntp_package can be one of ['ntp', 'ntpsec', 'chrony']
+spellbook_ntp_package: >-
+      {% if ansible_os_family == "RedHat" -%}
+      chrony
+      {%- else -%}
+      ntp
+      {%- endif -%}
+
+# Manage the NTP configuration file.
+spellbook_ntp_manage_config: true
+# Specify the NTP servers
+# Only takes effect when spellbook_ntp_manage_config is true.
+spellbook_ntp_servers:
+  - "ntp.aliyun.com iburst"
+# Restrict NTP access to these hosts.
+# Only takes effect when spellbook_ntp_manage_config is true.
+spellbook_ntp_restrict:
+  - "127.0.0.1"
+  - "::1"
+# Specify whether to filter interfaces
+spellbook_ntp_filter_interface: false
+# Specify the interfaces
+# Only takes effect when spellbook_ntp_filter_interface is true
+# spellbook_ntp_interfaces:
+#   - ignore wildcard
+#   - listen xxx
+# The NTP driftfile path
+# Only takes effect when spellbook_ntp_manage_config is true.
+# Default value is `/var/lib/ntp/ntp.drift`, for ntpsec use '/var/lib/ntpsec/ntp.drift'
+spellbook_ntp_driftfile: >-
+      {% if spellbook_ntp_package == "ntpsec" -%}
+      /var/lib/ntpsec/ntp.drift
+      {%- else -%}
+      /var/lib/ntp/ntp.drift
+      {%- endif -%}
+# Only takes effect when spellbook_ntp_manage_config is true.
+spellbook_ntp_tinker_panic: false
+
+# Force sync time immediately after the ntp installed, which is useful in a newly installed system.
+spellbook_ntp_force_sync_immediately: false
+
+# Set the timezone for your server.  eg: "Etc/UTC","Etc/GMT-8". If not set, the timezone will not change.
+spellbook_ntp_timezone: ""

@@ -1,0 +1,8 @@
+- hosts:
+    - all
+  become: yes
+  become_user: root
+  roles:
+    - spellbook.ntp
+  vars:
+    - spellbook_ntp_enabled: true

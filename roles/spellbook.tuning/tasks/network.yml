@@ -17,7 +17,7 @@
 
 - name: Configure the bonding master interface
   template:
-    src: "ifcfg-bond.j2"
+    src: "ifcfg_bond.j2"
     dest: "{{ spellbook_tuning_ifcfg }}{{ spellbook_tuning_nic_bonding_master }}"
     backup: yes
   when: spellbook_tuning_nic_bonding_slaves | length > 0 

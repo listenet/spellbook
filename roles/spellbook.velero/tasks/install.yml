@@ -32,7 +32,7 @@
 
 - name: copy velero auth file 
   template:
-    src: "velero-auth.txt.j2"
+    src: "velero_auth.txt.j2"
     dest: "{{ spellbook_velero_auth_file }}"
     mode: 0640
     owner: root

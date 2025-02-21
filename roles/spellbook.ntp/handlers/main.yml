@@ -1,0 +1,8 @@
+---
+# handlers file for roles/spellbook.ntp
+
+- name: Preinstall | restart ntp
+  service:
+    name: "{{ spellbook_ntp_service_name }}"
+    state: restarted
+  when: ntp_enabled

@@ -1,0 +1,4 @@
+---
+
+- name: Deploy named
+  import_playbook: playbooks/deploy_named.yml 

@@ -19,6 +19,10 @@ spellbook_domain_name_options_search:
 
 spellbook_global_asn: 64515
 
+spellbook_ntp_enabled: false
+spellbook_ntp_servers:
+  - "ntp.aliyun.com iburst"
+
 ## Directory where the binaries will be installed
 bin_dir: /usr/local/bin
 
