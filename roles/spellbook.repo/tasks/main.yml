@@ -1,0 +1,19 @@
+---
+# tasks file for roles/spellbook.repo
+
+- import_tasks: os_info.yml
+  when:
+  - spellbook_print_os_info
+  - spellbook_repo_enable
+
+- import_tasks: el7.yml
+  when:
+    - ansible_facts['os_family'] == "RedHat"
+    - ansible_facts['distribution_major_version'] == "7"
+    - spellbook_repo_enable
+
+- import_tasks: el9.yml
+  when:
+    - ansible_facts['os_family'] == "RedHat"
+    - ansible_facts['distribution_major_version'] == "9"
+    - spellbook_repo_enable

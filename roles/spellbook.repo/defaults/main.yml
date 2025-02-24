@@ -1,0 +1,101 @@
+---
+# defaults file for roles/spellbook.repo
+
+spellbook_repo_enabled: true
+
+spellbook_print_os_info: true
+
+sepllbooK_el9_repo_list:
+  - name: "elrepo"
+    file: "elrepo"
+    description: "ELRepo.org Community Enterprise Linux Repository - el9"
+    baseurl:  
+      - "http://mirrors.aliyun.com/elrepo/elrepo/el9/$basearch/"
+    mirrorlist: 
+      - "http://mirrors.elrepo.org/mirrors-elrepo.el9"
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org"
+  - name: "elrepo-kernel"
+    file: "elrepo"
+    description: "ELRepo.org Community Enterprise Linux Kernel Repository - el9"
+    baseurl: 
+      - "http://mirrors.aliyun.com/elrepo/kernel/el9/$basearch/"
+    mirrorlist: 
+      - "mirrorlist=http://mirrors.elrepo.org/mirrors-elrepo-kernel.el9"
+    enabled: true
+    countme: true
+    gpgcheck: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org"
+  - name: "extras"
+    file: "rocky-extras"
+    description: "Rocky Linux $releasever - Extras"
+    baseurl: 
+      - "https://mirrors.aliyun.com/rockylinux/$releasever/extras/$basearch/os/"
+    mirrorlist:
+      - "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=extras-$releasever$rltype"
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9"
+  - name: "baseos"
+    file: "rocky"
+    description: "Rocky Linux $releasever - BaseOS"
+    baseurl: 
+      - "https://mirrors.aliyun.com/rockylinux/$releasever/BaseOS/$basearch/os/"
+    mirrorlist:
+      - "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever$rltype"
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9"
+  - name: "appstream"
+    file: "rocky-extras"
+    description: "Rocky Linux $releasever - AppStream"
+    baseurl: 
+      - "https://mirrors.aliyun.com/rockylinux/$releasever/AppStream/$basearch/os/"
+    mirrorlist:
+      - "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=AppStream-$releasever$rltype"
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Rocky-9"
+
+sepllbooK_el7_repo_list:
+  - name: "base"
+    file: "Centos-7"
+    description: "CentOS-$releasever - Base - mirrors.aliyun.com"
+    baseurl:
+      - "http://mirrors.aliyun.com/centos/$releasever/os/$basearch/"
+      - "http://mirrors.aliyuncs.com/centos/$releasever/os/$basearch/"
+      - "http://mirrors.cloud.aliyuncs.com/centos/$releasever/os/$basearch/"
+    mirrorlist: ""
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7"
+  - name: "updates"
+    file: "Centos-7"
+    description: "CentOS-$releasever - Updates - mirrors.aliyun.com"
+    baseurl:
+      - "http://mirrors.aliyun.com/centos/$releasever/updates/$basearch/"
+      - "http://mirrors.aliyuncs.com/centos/$releasever/updates/$basearch/"
+      - "http://mirrors.cloud.aliyuncs.com/centos/$releasever/updates/$basearch/"
+    mirrorlist: ""
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7"
+  - name: "extras"
+    file: "Centos-7"
+    description: "CentOS-$releasever - Extras - mirrors.aliyun.com"
+    baseurl:
+      - "http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/"
+      - "http://mirrors.aliyuncs.com/centos/$releasever/extras/$basearch/"
+      - "http://mirrors.cloud.aliyuncs.com/centos/$releasever/extras/$basearch/"
+    mirrorlist: ""
+    gpgcheck: true
+    enabled: true
+    countme: true
+    gpgkey: "http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7"

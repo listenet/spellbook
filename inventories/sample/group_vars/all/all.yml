@@ -1,12 +1,24 @@
 ---
+# Enable linux config repo
+spellbook_repo_enable: true
 
+# Enble resolv config
 spellbook_resolv_config: true 
+
+# Enable network config
 spellbook_network_config: true
+
+# Off swap
 spellbook_swap_off: true
+# off firewalld
 spellbook_firewalld_off: true
 spellbook_instant_sync_time: true
 spellbook_install_nfs: true
+
+# Network config dns
 spellbook_network_config_dns: false
+
+# NetworkManager config dns
 spellbook_network_manager_dns: false
 
 spellbook_domain_name_server_ip:

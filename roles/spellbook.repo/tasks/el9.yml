@@ -1,0 +1,42 @@
+---
+
+- name: Check presence of fastestmirror.conf
+  stat:
+    path: /etc/yum/pluginconf.d/fastestmirror.conf
+  check_mode: no
+  register: fastestmirror
+
+- name: Disable fastestmirror plugin to speed up playbooks
+  lineinfile:
+    dest: /etc/yum/pluginconf.d/fastestmirror.conf
+    regexp: "^enabled=.*"
+    line: "enabled=0"
+    state: present
+  when: fastestmirror.stat.exists
+
+- name: List official repo
+  find:
+    paths:
+    - /etc/yum.repos.d
+  register: official_repos
+
+- name: Remove official repo
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ official_repos.files }}"
+
+- name: Add repository 
+  yum_repository:
+    name: "{{ item.name }}"
+    file: "{{ item.file }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    mirrorlist: "{{ item.mirrorlist }}"
+    enabled: "{{ item.enabled }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey: "{{ item.gpgkey }}"
+  loop: "{{ sepllbooK_el9_repo_list }}"
+
+- name: Clean Yum Repo
+  shell: "yum clean all && yum makecache"

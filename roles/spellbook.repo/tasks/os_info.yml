@@ -1,0 +1,5 @@
+---
+
+- name: Print os info
+  debug:
+    msg: "The os is : {{ ansible_facts['os_family'] }} : {{ ansible_facts['distribution_major_version'] }}"
