@@ -1,4 +1,10 @@
 ---
+
+# Enable kernel update
+spellbook_kernel_update: true
+# Reboot node after kernel update
+spellbook_kernel_reboot: true
+
 # Enable linux config repo
 spellbook_repo_enable: true
 
@@ -35,6 +41,12 @@ spellbook_ntp_enabled: true
 spellbook_ntp_servers:
   - "ntp.aliyun.com iburst"
 spellbook_ntp_timezone: "Asia/Shanghai"
+
+# kernel version 
+spellbook_kernel_version: "kernel-lt-6.1.129"
+spellbook_kernel_devel_version: "kernel-lt-devel-6.1.129"
+# kernel update grub2
+spellbook_kernel_update_grub2: true 
 
 ## Directory where the binaries will be installed
 bin_dir: /usr/local/bin

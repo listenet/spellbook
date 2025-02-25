@@ -1,0 +1,6 @@
+---
+# handlers file for roles/spellbook.kernel
+
+- name: Reboot machine
+  reboot:
+  when: spellbook_kernel_reboot

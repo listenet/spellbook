@@ -1,0 +1,10 @@
+---
+
+- hosts:
+    - all
+  become: yes
+  become_user: root
+  roles:
+    - spellbook.kernel
+  vars:
+    - spellbook_kernel_update : true

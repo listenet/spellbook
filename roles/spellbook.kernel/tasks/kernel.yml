@@ -1,0 +1,103 @@
+---
+
+- block:
+  - name: Confirm the reboot policy (Step 1)
+    pause:
+      prompt: |-
+        =================================================================
+        The "spellbook_kernel_reboot" has been set to "true".
+        It means the machines will be rebooted if the kernel is upgraded.
+        If you are sure to do this, type following text (DO NOT COPY)
+        -----------------------------------------------------------------
+        {{ spellbook_kernel_internal.reboot_answer }}
+        =================================================================
+        Your move
+    register: reboot_confirmation
+  - name: Confirm the reboot policy (Step 2)
+    fail:
+      msg:
+        If you don't want to reboot machine, try to use another playbook or set
+        the 'spellbook_kernel_reboot' to 'false' manually.
+    when:
+      reboot_confirmation is defined and
+      reboot_confirmation.user_input != spellbook_kernel_internal.reboot_answer
+  when: spellbook_kernel_reboot and not spellbook_kernel_reboot_without_confirm
+  any_errors_fatal: true  # Without this, the 2nd host won't be intercepted.
+
+- name: Disable SELinux
+  selinux:
+    conf: /etc/selinux/config
+    state: disabled
+
+- name: Remove kernels with legacy versions
+  yum:
+    name: "{{ item }}"
+    state: absent
+  loop:
+  - >-
+    "{{ spellbook_kernel_dist_absent |
+    reject('search',ansible_kernel.split('-')[0]) |list }}"
+
+  - >-
+    "{{ spellbook_kernel_devel_dist_absent |
+    reject('search',ansible_kernel.split('-')[0]) |list }}"
+
+- name: Install kernel with specified version
+  yum:
+    name: "{{ item }}"
+    state: present
+    validate_certs: yes
+    disable_gpg_check: true
+  loop:
+  - "{{ spellbook_kernel_dist }}"
+  - "{{ spellbook_kernel_devel_dist }}"
+ # - "{{ spellbook_kernel_debuginfo_dist }}"
+
+- name: Gather facts of installed kernel
+  package_facts:
+    manager: auto
+
+- name: Gather facts of installed kernel
+  set_fact:
+    kernel_want_version: "{{ spellbook_kernel_dist.split('-')[-1] }}"
+    kernel_have_version: "{{ ansible_kernel.split('-')[0] }}"
+
+- name: Update grub2 | Set kdump crashkernel memory
+  replace:
+    path: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX.*?)crashkernel=\S+(.*?)"'
+    replace: '\1crashkernel={{ spellbook_kernel_kdump_mem_size }}\2"'
+    backup: yes
+
+- name: Set GRUB_ENABLE_BLSCFG false
+  lineinfile:
+    path: /etc/default/grub
+    line: "GRUB_ENABLE_BLSCFG=false"
+    state: present
+    regexp: '^GRUB_ENABLE_BLSCFG'
+  when:
+    - ansible_facts['os_family'] == "RedHat"
+    - ansible_facts['distribution_major_version'] == "9"
+
+- name: Update grub2 | Update configuration
+  command:
+    argv: ["grub2-mkconfig", "-o", "/boot/grub2/grub.cfg"]
+  when:
+    spellbook_kernel_update_grub2
+    and (kernel_want_version != kernel_have_version)
+  notify: Reboot machine
+
+- name: Update grub2 | Choose default boot
+  shell:
+    set -o pipefail &&
+    grep "^menuentry" /boot/grub2/grub.cfg | cut -d "'" -f2 |
+    grep -n "{{ kernel_want_version }}" | cut -d ":" -f1
+  changed_when: false
+  register: kernel_want_bootid
+
+- name: Update grub2 | Update default boot
+  command:
+    argv: ["grub2-set-default", "{{ kernel_want_bootid.stdout|int(1) - 1 }}"]
+  when:
+    spellbook_kernel_update_grub2
+    and (kernel_want_version != kernel_have_version)

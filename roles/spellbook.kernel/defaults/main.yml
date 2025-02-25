@@ -1,0 +1,17 @@
+---
+# defaults file for roles/spellbook.kernel
+
+spellbook_kernel_update: true
+
+spellbook_kernel_dist: "{{ spellbook_kernel_version | default('kernel-lt-6.1.129') }}"
+spellbook_kernel_dist_absent:
+- "kernel-5.14.0"
+spellbook_kernel_devel_dist: "{{ spellbook_kernel_devel_version| default('kernel-lt-devel-6.1.129')}}"
+spellbook_kernel_devel_dist_absent: []
+spellbook_kernel_update_grub2: true 
+#spellbook_kernel_debuginfo_dist: "kernel-debuginfo-5.14.0"
+spellbook_kernel_reboot: true
+spellbook_kernel_kdump_mem_size: "256M"
+
+# Never set this true except you are playing in Vagrant VMs.
+spellbook_kernel_reboot_without_confirm: false

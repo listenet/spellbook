@@ -5,13 +5,6 @@
   become: yes
   become_user: root
   roles:
-    - spellbook.standardize
-
-- hosts:
-    - all
-  become: yes
-  become_user: root
-  roles:
     - spellbook.repo
   vars:
     - spellbook_repo_enable: true
@@ -22,6 +15,20 @@
   become_user: root
   roles:
     - spellbook.ntp
+
+- hosts:
+    - all
+  become: yes
+  become_user: root
+  roles:
+    - spellbook.kernel
+
+- hosts:
+    - all
+  become: yes
+  become_user: root
+  roles:
+    - spellbook.standardize
 
 - hosts:
     - all 

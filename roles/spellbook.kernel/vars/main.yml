@@ -1,0 +1,5 @@
+---
+# vars file for roles/spellbook.kernel
+
+spellbook_kernel_internal:
+  reboot_answer: "I am sure to reboot these machines"
