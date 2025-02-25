@@ -1,7 +1,7 @@
 ---
 
 # Enable kernel update
-spellbook_kernel_update: true
+spellbook_kernel_update: trues
 # Reboot node after kernel update
 spellbook_kernel_reboot: true
 
@@ -22,10 +22,10 @@ spellbook_instant_sync_time: true
 spellbook_install_nfs: true
 
 # Network config dns
-spellbook_network_config_dns: false
+spellbook_network_config_dns: true
 
 # NetworkManager config dns
-spellbook_network_manager_dns: false
+spellbook_network_manager_dns: true
 
 spellbook_domain_name_server_ip:
   - 192.168.2.11
