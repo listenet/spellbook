@@ -1,3 +1,5 @@
-#SPDX-License-Identifier: MIT-0
 ---
 # vars file for roles/spellbook.repo
+
+spellbook_repo_gpg_key_list:
+  - elrepo.org

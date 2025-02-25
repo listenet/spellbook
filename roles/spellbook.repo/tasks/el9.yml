@@ -38,5 +38,18 @@
     gpgkey: "{{ item.gpgkey }}"
   loop: "{{ sepllbooK_el9_repo_list }}"
 
+- name: Upload GPG key
+  copy:
+    src: RPM-GPG-KEY-{{ item }}
+    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-{{ item }}
+  loop: "{{ spellbook_repo_gpg_key_list }}"
+  check_mode: no
+
+- name: Import GPG key
+  rpm_key:
+    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-{{ item }}
+    state: present
+  loop: "{{ spellbook_repo_gpg_key_list }}"
+
 - name: Clean Yum Repo
   shell: "yum clean all && yum makecache"

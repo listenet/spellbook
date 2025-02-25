@@ -11,8 +11,7 @@ sepllbooK_el9_repo_list:
     description: "ELRepo.org Community Enterprise Linux Repository - el9"
     baseurl:  
       - "http://mirrors.aliyun.com/elrepo/elrepo/el9/$basearch/"
-    mirrorlist: 
-      - "http://mirrors.elrepo.org/mirrors-elrepo.el9"
+    mirrorlist: "http://mirrors.elrepo.org/mirrors-elrepo.el9"
     gpgcheck: true
     enabled: true
     countme: true
@@ -22,8 +21,7 @@ sepllbooK_el9_repo_list:
     description: "ELRepo.org Community Enterprise Linux Kernel Repository - el9"
     baseurl: 
       - "http://mirrors.aliyun.com/elrepo/kernel/el9/$basearch/"
-    mirrorlist: 
-      - "mirrorlist=http://mirrors.elrepo.org/mirrors-elrepo-kernel.el9"
+    mirrorlist: "mirrorlist=http://mirrors.elrepo.org/mirrors-elrepo-kernel.el9"
     enabled: true
     countme: true
     gpgcheck: true
@@ -33,8 +31,7 @@ sepllbooK_el9_repo_list:
     description: "Rocky Linux $releasever - Extras"
     baseurl: 
       - "https://mirrors.aliyun.com/rockylinux/$releasever/extras/$basearch/os/"
-    mirrorlist:
-      - "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=extras-$releasever$rltype"
+    mirrorlist: "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=extras-$releasever$rltype"
     gpgcheck: true
     enabled: true
     countme: true
@@ -44,8 +41,7 @@ sepllbooK_el9_repo_list:
     description: "Rocky Linux $releasever - BaseOS"
     baseurl: 
       - "https://mirrors.aliyun.com/rockylinux/$releasever/BaseOS/$basearch/os/"
-    mirrorlist:
-      - "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever$rltype"
+    mirrorlist: "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever$rltype"
     gpgcheck: true
     enabled: true
     countme: true
@@ -55,8 +51,7 @@ sepllbooK_el9_repo_list:
     description: "Rocky Linux $releasever - AppStream"
     baseurl: 
       - "https://mirrors.aliyun.com/rockylinux/$releasever/AppStream/$basearch/os/"
-    mirrorlist:
-      - "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=AppStream-$releasever$rltype"
+    mirrorlist: "https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=AppStream-$releasever$rltype"
     gpgcheck: true
     enabled: true
     countme: true
