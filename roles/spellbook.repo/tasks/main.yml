@@ -14,6 +14,6 @@
 
 - import_tasks: el9.yml
   when:
-    - ansible_facts['os_family'] == "RedHat"
+    - ansible_facts['os_family'] == "RedHat" or ansible_facts['os_family'] == "Rocky"
     - ansible_facts['distribution_major_version'] == "9"
     - spellbook_repo_enable
