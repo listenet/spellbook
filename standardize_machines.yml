@@ -1,0 +1,4 @@
+---
+
+- name: Standardize machines
+  import_playbook: playbooks/standardize_machines.yml
