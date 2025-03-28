@@ -3,7 +3,6 @@ spellbook_network_config: false
 spellbook_swap_off: true
 spellbook_firewalld_off: true
 spellbook_instant_sync_time: false
-spellbook_chronyc_run_num: 3
 spellbook_install_nfs: false
 
 spellbook_resolv_path: "/etc/resolv.conf"
