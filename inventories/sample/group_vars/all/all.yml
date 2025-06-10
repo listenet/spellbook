@@ -28,14 +28,14 @@ spellbook_network_config_dns: true
 spellbook_network_manager_dns: true
 
 spellbook_domain_name_server_ip:
-  - 192.168.2.11
-  - 192.168.2.12
+  - 192.168.1.101
+  - 192.168.1.102
 spellbook_domain_name_options_timeout: "2"
 spellbook_domain_name_options_attempts: "2"
 spellbook_domain_name_options_search:
   - "dns.v.com"
 
-spellbook_global_asn: 64515
+spellbook_global_asn: 64512
 
 spellbook_ntp_enabled: true
 spellbook_ntp_servers:
@@ -43,8 +43,8 @@ spellbook_ntp_servers:
 spellbook_ntp_timezone: "Asia/Shanghai"
 
 # kernel version 
-spellbook_kernel_version: "kernel-lt-6.1.129"
-spellbook_kernel_devel_version: "kernel-lt-devel-6.1.129"
+spellbook_kernel_version: "kernel-lt-6.1.141"
+spellbook_kernel_devel_version: "kernel-lt-devel-6.1.141"
 # kernel update grub2
 spellbook_kernel_update_grub2: true 
 

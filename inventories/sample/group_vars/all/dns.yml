@@ -1,27 +1,29 @@
 spellbook_forwarder_list:
   - 223.5.5.5
-spellbook_zones_list: 
+spellbook_zones_list:
   - dns.v.com
 
 spellbook_slaves_list:
-  - 192.168.2.11
-  - 192.168.2.12
+  - 192.168.1.102
 spellbook_internal_list:
   - 10.0.0.0/8
   - 172.16.0.0/12
   - 192.168.0.0/16
-spellbook_dns_masters_list: 
-  - "192.168.2.11"
+spellbook_dns_masters_list:
+  - "192.168.1.101"
 spellbook_dns_v_records:
-  - "ns1              IN  A     192.168.2.11"
-  - "ns2              IN  A     192.168.2.12"
-  - "www              IN  A     192.168.2.11"
+  - "ns1              IN  A     192.168.1.101"
+  - "ns2              IN  A     192.168.1.102"
+  - "www              IN  A     192.168.1.101"
   - "master           IN  CNAME www"
-  - "slave            IN  A     192.168.2.12"
-  - "v1-p-11   IN  A     192.168.2.11"
-  - "v1-p-12   IN  A     192.168.2.12"
-  - "v1-k-201  IN  A     192.168.2.201"
-  - "v1-k-191  IN  A     192.168.2.191"
-  - "v1-k-192  IN  A     192.168.2.192"
-  - "v1-r-254  IN  A     192.168.2.254"
-  - "offline-file     IN  A     192.168.2.12"
+  - "slave            IN  A     192.168.1.102"
+  - "s1-p-101				 	IN  A     192.168.1.101"
+  - "s1-p-102   			IN  A     192.168.1.102"
+  - "s1-k1-m1  				IN  A     192.168.1.1"
+  - "s1-k1-m2  				IN  A     192.168.1.2"
+  - "s1-k1-m3  				IN  A     192.168.1.3"
+  - "s1-k1-ipvs-07  	IN  A     192.168.1.7"
+  - "s1-k1-ipvs-08  	IN  A     192.168.1.8"
+  - "s1-k1-11  				IN  A     192.168.1.11"
+  - "s1-k1-11 				IN  A     192.168.1.12"
+  - "s1-r1  					IN  A     192.168.1.254"

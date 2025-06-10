@@ -28,7 +28,5 @@ ansible-playbook -i inventories/v1-test/hosts playbooks/clean-k8s.yml --limit=ku
 
 ## run spellbook in docker
 ```
-docker run --rm -it --mount type=bind,source="$(pwd)"/,dst=/root/spellbook \
-  --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
-  registry.cn-beijing.aliyuncs.com/openly/rockylinux:9.3-ansible bash
+docker run --rm -itd --network host --mount type=bind,source=${PWD}/,dst=/spellbook/  --mount type=bind,source=${HOME}/.ssh/,dst=/root/.ssh/	registry.cn-beijing.aliyuncs.com/spellbook/ansible:v2.16.14 bash
 ```

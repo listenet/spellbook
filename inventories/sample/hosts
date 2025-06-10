@@ -5,22 +5,22 @@ dns
 calico_rr
 
 [route]
-v1-r-254 ansible_host=192.168.1.254
+s1-r1 ansible_host=192.168.1.254
 
 #[calico_rr]
-#rr0 ansible_ssh_host=192.168.2.253 ip=192.168.2.253
-#rr1 ansible_ssh_host=192.168.2.1 ip=192.168.2.1
+#rr0 ansible_ssh_host=192.168.1.254 ip=192.168.1.254
+#rr1 ansible_ssh_host=192.168.1.253 ip=192.168.1.253
 #
 #[kube_cluster:vars]
-#cluster_id="192.168.2.1"
+#cluster_id="192.168.1.1"
 #calico_rr_id=rr1
 #calico_group_id=rr1 
 
 [dnsmaster]
-v1-p-11 ansible_host=192.168.2.11
+s1-p-101 ansible_host=192.168.1.101
 
 [dnsslave]
-v1-p-12 ansible_host=192.168.2.12
+s1-p-102 ansible_host=192.168.1.102
 
 [dns:children]
 dnsmaster
@@ -31,12 +31,15 @@ kube_control_plane
 kube_node
 
 [kube_control_plane]
-v1-k-201 ansible_host=192.168.2.201
+s1-k1-m1 ansible_host=192.168.1.1
 
 [kube_node]
 
 [etcd]
-v1-k-201
+s1-k1-m1
 
 [offline]
-v1-p-12
+s1-p-102
+
+[all]
+s1-base-r96  ansible_host=192.168.1.96
