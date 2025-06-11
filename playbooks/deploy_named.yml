@@ -1,5 +1,7 @@
 ---
 - hosts: dnsmaster
+  become: yes
+  become_user: root
   gather_facts: False
   roles:
     - spellbook.named
@@ -10,6 +12,8 @@
     - spellbook_dns_master
 
 - hosts: dnsslave
+  become: yes
+  become_user: root
   gather_facts: False
   roles:
     - spellbook.named
